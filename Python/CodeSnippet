@@ -1,0 +1,14 @@
+# access value in a nested dict
+def listRecursive (d, key):
+	for k, v in d.items ():
+		if isinstance (v, dict):
+			for found in listRecursive (v, key):
+				yield found
+		if k == key:
+			yield v
+for column in listRecursive (derrivals, 'ID'):
+	print (column)
+	
+# format dict item's output
+formated=pprint.pformat(derrivals, width = 120)
+print(formated)
