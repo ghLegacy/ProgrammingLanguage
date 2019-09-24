@@ -1,0 +1,15 @@
+Q: Combine two rows into one row based on certain column valye
+select st.BUS_NUMBER, st.STOP_ID, st.SCHEDULED_STOP_ID,
+        MAX(case when st.ARRIVAL = 1 then ID end) as ARRIVAL_ID,
+        MAX(case when st.ARRIVAL = 1 then EVENT_TIME end) as ARRIVAL_TIME,
+        MAX(case when st.ARRIVAL = 1 then DEVIATION end) as ARRIVAL_DEVIATION,
+        MAX(case when st.ARRIVAL = 0 then ID end) as DEPARTURE_ID,
+        MAX(case when st.ARRIVAL = 0 then EVENT_TIME end) as DEPARTURE_TIME,
+        MAX(case when st.ARRIVAL = 0 then DEVIATION end) as DEPARTURE_DEVIATION
+from STOP_EVENTS st
+where 
+--st.BUS_NUMBER IN (853, 833) AND 
+st.EVENT_TIME > '2019-05-10 00:00:00.000' AND 
+st.EVENT_TIME < '2019-05-10 23:59:59.000'
+group by st.BUS_NUMBER, st.STOP_ID, st.SCHEDULED_STOP_ID
+order by BUS_NUMBER, SCHEDULED_STOP_ID;
