@@ -1,0 +1,2 @@
+I: If you cant see database diagram or any other elements in the DB use the following:
+$ EXEC sp_changedbowner 'sa'
